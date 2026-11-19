@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Body & UI */
+  --font-sans: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Display & headings */
+  --font-display: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  /* Figures: money, dates, stats */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Obsidian & velvet burgundy */
+  --color-canvas: #070608; /* --bg-obsidian: pitch black, warm undertone */
+  --color-surface: #110c0f; /* --bg-surface: charcoal-burgundy cards & panels */
+  --color-surface-hover: #1a1116;
+  --color-line: rgb(190 24 60 / 0.18); /* crimson-tinted glass borders */
+  --color-ink: #f5f0f2; /* rose-platinum: headings & data */
+  --color-ink-soft: #ddd3d7;
+  --color-ink-mute: #a89ca1; /* warm silver: secondary text (≈7:1) */
+  --color-ink-faint: #6e6268; /* decoration only */
+  --color-crimson-deep: #7f1028; /* velvet burgundy */
+  --color-ruby: #c81e45;
+  --color-crimson: #e11d48; /* ruby crimson: accents, borders, indicators */
+  --color-crimson-light: #fb7185; /* crimson for small text (≈7:1 on cards) */
+
+  /* Results & status chips (white text on each) */
+  --color-win: #16a34a;
+  --color-win-light: #4ade80; /* advantage highlights in small text (≈10:1 on surfaces) */
+  --color-draw: #4b5563;
+  --color-loss: #dc2626;
+  --color-pitch: #0e090b; /* formation pitch */
+  --color-pitch-line: #3a1520;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+::selection {
+  background: var(--color-crimson);
+  color: var(--color-canvas);
+}
+
+html,
+body {
+  background-color: var(--color-canvas);
+  /* Velvet-navy and warm-amber ambient light, fixed behind everything */
+  /* Burgundy-crimson stadium glow from the top edge, fading into black */
+  background-image:
+    radial-gradient(90% 55% at 50% -12%, rgb(127 16 40 / 0.55), transparent 70%),
+    radial-gradient(45% 35% at 50% -6%, rgb(225 29 72 / 0.18), transparent 70%),
+    radial-gradient(70% 45% at 50% 115%, rgb(127 16 40 / 0.18), transparent 70%);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/*
+ * Hairline grid: children sit on a 1px hairline lattice with no doubled borders.
+ * The container draws the top/left edges and each cell its right/bottom edges,
+ * so an incomplete last row simply ends (no filled empty cells).
+ */
+.hairline-grid {
+  display: grid;
+  border-top: 1px solid var(--color-line);
+  border-left: 1px solid var(--color-line);
+}
+.hairline-grid > * {
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Editorial caption: calm sentence case, no shouty tracking */
+.label {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--color-ink-mute);
+}
+
+/* Headings: refined weights with tight tracking */
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  letter-spacing: -0.025em;
+}
+
+/* Figures (money, dates, stats) align like a terminal readout */
+.font-mono {
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

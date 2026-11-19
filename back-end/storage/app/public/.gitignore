@@ -1,0 +1,5 @@
+*
+!.gitignore
+# Player cut-outs served from /storage/cutouts are part of the repository.
+!cutouts/
+!cutouts/**
