@@ -12,9 +12,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
+RUN cp -n .env.example .env || true
 RUN composer install --no-dev --optimize-autoloader
 RUN mkdir -p database && touch database/database.sqlite
-RUN php artisan key:generate --force || true
+RUN php artisan key:generate --force
 RUN php artisan migrate --force || true
 RUN php artisan storage:link || true
 
